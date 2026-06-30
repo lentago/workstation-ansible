@@ -1,0 +1,34 @@
+# ============================================================================
+# Ansible Lint — syntax check + ansible-lint on every non-draft PR.
+# Self-contained (no shared workflow exists for Ansible yet). Required-ish
+# signal for the playbook + roles; could graduate to shared-workflows later.
+# ============================================================================
+name: Ansible Lint
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Ansible + ansible-lint
+        run: pip install --upgrade ansible ansible-lint
+
+      - name: Install required collections
+        run: ansible-galaxy collection install -r requirements.yml
+
+      - name: Syntax check
+        run: ansible-playbook --syntax-check -i inventory/hosts.yml site.yml
+
+      - name: ansible-lint
+        run: ansible-lint

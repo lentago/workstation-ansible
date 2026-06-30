@@ -1,0 +1,12 @@
+# Add repo-specific ignores here.
+.DS_Store
+*.log
+node_modules/
+__pycache__/
+.venv/
+dist/
+
+# Ansible
+*.retry
+collections/
+.ansible/
