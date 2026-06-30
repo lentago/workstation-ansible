@@ -30,6 +30,11 @@ self-provisions a fresh box with one command.
 
 ## Quick start
 
+> **Prerequisite:** the one-liner needs `curl`, and the clone path needs `git`.
+> Both are present on a typical desktop install, but a minimal image may ship
+> neither — `sudo apt install -y curl` (Debian/Ubuntu) or `sudo dnf install -y
+> curl` (Fedora) first if so. `bootstrap.sh` installs everything else.
+
 Self-provision a fresh box (installs Ansible, then runs the play):
 
 ```bash
