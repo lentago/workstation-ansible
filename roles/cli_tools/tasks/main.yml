@@ -47,10 +47,14 @@
     version: master
   become: false
 
+# Generate ~/.fzf.bash (PATH + key-bindings + completion) but don't touch
+# .bashrc — the shell role owns that, and the block sources ~/.fzf.bash.
+# (`--no-bash` would skip generating that file, breaking both the `creates:`
+# idempotency guard and the shell integration.)
 - name: Run the fzf installer
   ansible.builtin.command: >-
     {{ target_home }}/.fzf/install --key-bindings --completion
-    --no-update-rc --no-bash --no-zsh --no-fish
+    --no-update-rc --no-zsh --no-fish
   args:
     creates: "{{ target_home }}/.fzf.bash"
   become: false
