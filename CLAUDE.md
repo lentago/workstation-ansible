@@ -59,15 +59,19 @@ instead of ~1,000-line bash scripts. It supersedes the bash scripts in
 
 ## Status
 
-- **All three Debian-family profiles (`xubuntu`, `ubuntu_laptop`, `crostini`)
-  are runnable.** Crostini runs Docker CLI-only; the `common` role handles its
-  hostname-resolution (sudo) and `~/.local/bin` quirks.
-- **Fedora** runs the shared toolchain plus Docker + VS Code from their dnf
-  repos (`containers`/`editors` roles).
-- **`ubuntu_laptop`** adds TLP power management, ThinkPad charge thresholds, and
-  fwupd via the `power` role (`enable_tlp`).
+- **`xubuntu` and `fedora` are validated end-to-end on the testbeds**
+  (Xubuntu 26.04 / Fedora 44; see [`docs/testbed.md`](docs/testbed.md)): from a
+  pristine box, `bootstrap.sh` provisions clean (`failed=0`) and re-runs
+  idempotently (`changed=0`), profile autodetected. Fedora pulls Docker + VS
+  Code from their dnf repos (`containers`/`editors`).
+- **`crostini` and `ubuntu_laptop` are runnable by design but not yet
+  live-tested** — Crostini lives on the Chromebook (Docker CLI-only; the
+  `common` role handles its hostname/`~/.local/bin` quirks); `ubuntu_laptop` is
+  bare metal and adds TLP + ThinkPad charge thresholds + fwupd via the `power`
+  role (`enable_tlp`).
 - **No pending role follow-ups.** All core and platform roles are in; remote
-  desktop (XRDP) was dropped as unused.
+  desktop (XRDP) was dropped as unused. Static CI can't catch runtime-only
+  failures (removed plugins, host deps, idempotency) — real testbed runs do.
 
 ## Testbed
 
