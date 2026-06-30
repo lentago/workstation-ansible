@@ -85,11 +85,15 @@ The profile autodetects from host facts when unset. Run a subset with tags, e.g.
 
 ## Status
 
-**All four profiles are runnable.** Fedora installs the shared toolchain plus
-Docker + VS Code from their dnf repos; `ubuntu_laptop` adds TLP power
-management, ThinkPad charge thresholds, and fwupd via the `power` role; Crostini
-runs Docker CLI-only with hostname-resolution and `~/.local/bin` fixes from the
-`common` role.
+**`xubuntu` and `fedora` are validated end-to-end** on clean Xubuntu 26.04 and
+Fedora 44 VMs: a pristine box provisions with no failures and re-runs
+idempotently, with the profile autodetected. Fedora installs the shared
+toolchain plus Docker + VS Code from their dnf repos.
+
+**`crostini` and `ubuntu_laptop` are runnable but not yet live-tested.**
+`ubuntu_laptop` adds TLP power management, ThinkPad charge thresholds, and fwupd
+via the `power` role; Crostini runs Docker CLI-only with hostname-resolution and
+`~/.local/bin` fixes from the `common` role.
 
 ---
 
